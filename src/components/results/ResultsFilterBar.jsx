@@ -1,3 +1,4 @@
+import { Search } from 'lucide-react'
 import { CONCLUSION_META } from '../../utils/conclusionMeta'
 
 export default function ResultsFilterBar({ filters, onChange, options }) {
@@ -7,6 +8,17 @@ export default function ResultsFilterBar({ filters, onChange, options }) {
 
   return (
     <div className="flex flex-wrap gap-3">
+      <div className="relative">
+        <Search size={15} className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400" />
+        <input
+          type="text"
+          value={filters.q}
+          onChange={(e) => update('q', e.target.value)}
+          placeholder="Tìm theo mã BN hoặc họ tên..."
+          className="w-56 rounded-md border border-slate-300 py-1.5 pl-8 pr-3 text-sm focus:border-brand-accent focus:outline-none"
+        />
+      </div>
+
       <select
         value={filters.maLoi}
         onChange={(e) => update('maLoi', e.target.value)}

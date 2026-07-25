@@ -6,8 +6,9 @@ import ResultsFilterBar from '../components/results/ResultsFilterBar'
 import LoadingSpinner from '../components/common/LoadingSpinner'
 import ErrorBanner from '../components/common/ErrorBanner'
 import * as analyzeApi from '../api/analyzeApi'
+import { normalizeText } from '../utils/normalizeText'
 
-const emptyFilters = { ketLuan: '', maKhoa: '', maLoi: '' }
+const emptyFilters = { ketLuan: '', maKhoa: '', maLoi: '', q: '' }
 
 export default function ResultsPage() {
   const { batchId } = useParams()
@@ -18,10 +19,16 @@ export default function ResultsPage() {
   const [reanalyzeError, setReanalyzeError] = useState('')
 
   const filteredResults = useMemo(() => {
+    const q = normalizeText(filters.q)
     return allResults.filter((r) => {
       if (filters.ketLuan && r.ketLuan !== filters.ketLuan) return false
       if (filters.maKhoa && r.errorRow?.maKhoa !== filters.maKhoa) return false
       if (filters.maLoi && !(r.duDoanMaLoi || []).some((w) => w.maLoi === filters.maLoi)) return false
+      if (q) {
+        const maBN = normalizeText(r.errorRow?.maBN)
+        const hoTen = normalizeText(r.errorRow?.hoTen)
+        if (!maBN.includes(q) && !hoTen.includes(q)) return false
+      }
       return true
     })
   }, [allResults, filters])
