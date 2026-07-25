@@ -1,4 +1,4 @@
-import { ClipboardList, FilePlus2, Pill, Stethoscope, AlertTriangle, Settings, UserRound } from 'lucide-react'
+import { ClipboardList, FilePlus2, Pill, Stethoscope, AlertTriangle, Settings, UserRound, Layers } from 'lucide-react'
 
 export const navSections = [
   {
@@ -15,6 +15,7 @@ export const navSections = [
       { to: '/danh-muc/dich-vu', label: 'Danh mục dịch vụ kỹ thuật', icon: Stethoscope },
       { to: '/danh-muc/ma-loi', label: 'Danh mục mã lỗi', icon: AlertTriangle },
       { to: '/danh-muc/bac-si', label: 'Danh mục bác sĩ', icon: UserRound },
+      { to: '/danh-muc/ma-nhom', label: 'Danh mục mã nhóm DVKT', icon: Layers },
     ],
   },
   {

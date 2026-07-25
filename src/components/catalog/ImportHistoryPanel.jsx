@@ -4,6 +4,20 @@ import LoadingSpinner from '../common/LoadingSpinner'
 import ErrorBanner from '../common/ErrorBanner'
 import { formatDate } from '../../utils/formatDate'
 
+const STATUS_LABEL = {
+  processing: 'Đang xử lý',
+  success: 'Hoàn tất',
+  partial: 'Hoàn tất (có cảnh báo)',
+  failed: 'Thất bại',
+}
+
+const STATUS_CLASS = {
+  processing: 'text-amber-600',
+  success: 'text-emerald-600',
+  partial: 'text-amber-600',
+  failed: 'text-red-600',
+}
+
 export default function ImportHistoryPanel({ type, onClose }) {
   const { imports, loading, error } = useImportHistory(type)
 
@@ -35,6 +49,7 @@ export default function ImportHistoryPanel({ type, onClose }) {
                 <th className="px-3 py-2">Người nhập</th>
                 <th className="px-3 py-2">Thêm mới</th>
                 <th className="px-3 py-2">Cập nhật</th>
+                <th className="px-3 py-2">Trạng thái</th>
               </tr>
             </thead>
             <tbody>
@@ -45,6 +60,9 @@ export default function ImportHistoryPanel({ type, onClose }) {
                   <td className="px-3 py-2">{item.importedBy?.username || '-'}</td>
                   <td className="px-3 py-2">{item.rowsInserted}</td>
                   <td className="px-3 py-2">{item.rowsUpdated}</td>
+                  <td className={`px-3 py-2 font-medium ${STATUS_CLASS[item.status] || ''}`}>
+                    {STATUS_LABEL[item.status] || item.status}
+                  </td>
                 </tr>
               ))}
             </tbody>

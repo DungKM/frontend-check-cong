@@ -14,6 +14,10 @@ export function importCatalog(type, file) {
     .then((res) => res.data)
 }
 
+export function getImportStatus(type, importId) {
+  return axiosClient.get(`/catalogs/${type}/imports/${importId}`).then((res) => res.data)
+}
+
 export function listImportHistory(type) {
   return axiosClient.get(`/catalogs/${type}/imports`).then((res) => res.data)
 }

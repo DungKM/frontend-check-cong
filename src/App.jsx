@@ -11,6 +11,7 @@ import DrugCatalogPage from './pages/DrugCatalogPage'
 import ServiceCatalogPage from './pages/ServiceCatalogPage'
 import ErrorCodeCatalogPage from './pages/ErrorCodeCatalogPage'
 import DoctorCatalogPage from './pages/DoctorCatalogPage'
+import ServiceGroupCatalogPage from './pages/ServiceGroupCatalogPage'
 import SettingsPage from './pages/SettingsPage'
 import NotFoundPage from './pages/NotFoundPage'
 
@@ -29,6 +30,7 @@ function App() {
             <Route path="/danh-muc/dich-vu" element={<ServiceCatalogPage />} />
             <Route path="/danh-muc/ma-loi" element={<ErrorCodeCatalogPage />} />
             <Route path="/danh-muc/bac-si" element={<DoctorCatalogPage />} />
+            <Route path="/danh-muc/ma-nhom" element={<ServiceGroupCatalogPage />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Route>
         </Route>
