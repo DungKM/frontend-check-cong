@@ -1,8 +1,17 @@
 import { ShieldCheck } from 'lucide-react'
+import { useAuth } from '../../auth/useAuth'
 import { navSections } from './navConfig'
 import SidebarSection from './SidebarSection'
 
 export default function Sidebar({ open, onNavigate }) {
+  const { user } = useAuth()
+  const visibleSections = navSections
+    .map((section) => ({
+      ...section,
+      items: section.items.filter((item) => !item.roles || item.roles.includes(user?.role)),
+    }))
+    .filter((section) => section.items.length > 0)
+
   return (
     <>
       {open && (
@@ -22,7 +31,7 @@ export default function Sidebar({ open, onNavigate }) {
         </div>
 
         <div className="flex flex-1 flex-col gap-6">
-          {navSections.map((section) => (
+          {visibleSections.map((section) => (
             <SidebarSection key={section.title} title={section.title} items={section.items} onNavigate={onNavigate} />
           ))}
         </div>

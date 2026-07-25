@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react'
-import * as batchApi from '../api/batchApi'
+import * as userApi from '../api/userApi'
 
-export function useBatches() {
-  const [batches, setBatches] = useState([])
+export function useUsers() {
+  const [items, setItems] = useState([])
   const [total, setTotal] = useState(0)
   const [page, setPage] = useState(1)
   const [pageSize] = useState(20)
@@ -13,11 +13,11 @@ export function useBatches() {
     setLoading(true)
     setError('')
     try {
-      const data = await batchApi.listBatches({ page, pageSize })
-      setBatches(data.items)
+      const data = await userApi.listUsers({ page, pageSize })
+      setItems(data.items)
       setTotal(data.total)
     } catch (err) {
-      setError(err.response?.data?.message || 'Không tải được danh sách đợt đối chiếu')
+      setError(err.response?.data?.message || 'Không tải được danh sách tài khoản')
     } finally {
       setLoading(false)
     }
@@ -27,5 +27,5 @@ export function useBatches() {
     refresh()
   }, [refresh])
 
-  return { batches, total, page, pageSize, setPage, loading, error, refresh }
+  return { items, total, page, pageSize, setPage, loading, error, refresh }
 }
