@@ -17,7 +17,7 @@ function ChartTooltip({ active, payload, label }) {
 
 export default function DeductionByKhoaChart({ data }) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
       <h3 className="mb-3 text-sm font-semibold text-slate-700 dark:text-slate-200">Tiền cảnh báo theo khoa</h3>
       <ResponsiveContainer width="100%" height={280}>
         <BarChart data={data} margin={{ top: 4, right: 8, left: 8, bottom: 4 }}>

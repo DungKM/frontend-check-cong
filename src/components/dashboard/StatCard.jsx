@@ -1,4 +1,4 @@
-export default function StatCard({ label, value, accent = 'text-slate-800 dark:text-slate-100', icon: Icon, iconColor = 'bg-slate-100 text-slate-600', badge }) {
+export default function StatCard({ label, value, accent = 'text-slate-800 dark:text-slate-100', icon: Icon, iconColor = 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300', badge }) {
   return (
     <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-slate-800 dark:bg-slate-900">
       <div className="flex items-start justify-between">
