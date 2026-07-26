@@ -3,7 +3,7 @@ export default function Pagination({ page, pageSize, total, onPageChange }) {
   if (totalPages <= 1) return null
 
   return (
-    <div className="flex items-center justify-between border-t border-slate-200 px-4 py-3 text-sm text-slate-600">
+    <div className="flex items-center justify-between border-t border-slate-200 px-4 py-3 text-sm text-slate-600 dark:border-slate-800 dark:text-slate-400">
       <span>
         Trang {page}/{totalPages} · {total.toLocaleString('vi-VN')} dòng
       </span>
@@ -11,14 +11,14 @@ export default function Pagination({ page, pageSize, total, onPageChange }) {
         <button
           onClick={() => onPageChange(page - 1)}
           disabled={page <= 1}
-          className="rounded-md border border-slate-300 px-3 py-1 disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-md border border-slate-300 px-3 py-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:hover:bg-slate-800"
         >
           Trước
         </button>
         <button
           onClick={() => onPageChange(page + 1)}
           disabled={page >= totalPages}
-          className="rounded-md border border-slate-300 px-3 py-1 disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-md border border-slate-300 px-3 py-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:hover:bg-slate-800"
         >
           Sau
         </button>

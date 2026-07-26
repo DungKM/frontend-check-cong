@@ -15,14 +15,14 @@ export default function ResultsFilterBar({ filters, onChange, options }) {
           value={filters.q}
           onChange={(e) => update('q', e.target.value)}
           placeholder="Tìm theo mã BN hoặc họ tên..."
-          className="w-56 rounded-md border border-slate-300 py-1.5 pl-8 pr-3 text-sm focus:border-brand-accent focus:outline-none"
+          className="w-56 rounded-md border border-slate-300 py-1.5 pl-8 pr-3 text-sm focus:border-brand-accent focus:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
         />
       </div>
 
       <select
         value={filters.maLoi}
         onChange={(e) => update('maLoi', e.target.value)}
-        className="rounded-md border border-slate-300 px-3 py-1.5 text-sm"
+        className="rounded-md border border-slate-300 px-3 py-1.5 text-sm dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
       >
         <option value="">Tất cả mã lỗi</option>
         {options.maLoiList.map((item) => (
@@ -35,7 +35,7 @@ export default function ResultsFilterBar({ filters, onChange, options }) {
       <select
         value={filters.ketLuan}
         onChange={(e) => update('ketLuan', e.target.value)}
-        className="rounded-md border border-slate-300 px-3 py-1.5 text-sm"
+        className="rounded-md border border-slate-300 px-3 py-1.5 text-sm dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
       >
         <option value="">Tất cả kết luận</option>
         {Object.entries(CONCLUSION_META).map(([value, meta]) => (
@@ -48,7 +48,7 @@ export default function ResultsFilterBar({ filters, onChange, options }) {
       <select
         value={filters.maKhoa}
         onChange={(e) => update('maKhoa', e.target.value)}
-        className="rounded-md border border-slate-300 px-3 py-1.5 text-sm"
+        className="rounded-md border border-slate-300 px-3 py-1.5 text-sm dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
       >
         <option value="">Tất cả khoa</option>
         {options.khoaList.map((khoa) => (

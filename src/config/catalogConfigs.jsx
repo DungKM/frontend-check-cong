@@ -1,3 +1,4 @@
+import { Pill, Stethoscope, AlertTriangle, UserRound, Layers, Boxes } from 'lucide-react'
 import { formatDate } from '../utils/formatDate'
 import { formatCurrency } from '../utils/formatCurrency'
 
@@ -9,6 +10,7 @@ const MUC_DO_LABEL = {
 
 export const CATALOG_CONFIGS = {
   drug: {
+    icon: Pill,
     title: 'Danh mục thuốc',
     subtitle: 'Danh mục thuốc bệnh viện dùng để đối chiếu mã chi phí trong hồ sơ giám định XML',
     searchPlaceholder: 'Tìm theo mã thuốc hoặc tên thuốc...',
@@ -38,6 +40,7 @@ export const CATALOG_CONFIGS = {
     ],
   },
   service: {
+    icon: Stethoscope,
     title: 'Danh mục dịch vụ kỹ thuật',
     subtitle: 'Danh mục DVKT phê duyệt dùng để đối chiếu mã chi phí trong hồ sơ giám định XML',
     searchPlaceholder: 'Tìm theo mã hoặc tên dịch vụ...',
@@ -59,6 +62,7 @@ export const CATALOG_CONFIGS = {
     ],
   },
   errorCode: {
+    icon: AlertTriangle,
     title: 'Danh mục mã lỗi',
     subtitle: 'Danh mục mã lỗi/cảnh báo dùng để dự đoán khả năng bị từ chối khi gửi cổng giám định',
     searchPlaceholder: 'Tìm theo mã lỗi hoặc tên lỗi...',
@@ -83,6 +87,7 @@ export const CATALOG_CONFIGS = {
     ],
   },
   doctor: {
+    icon: UserRound,
     title: 'Danh mục bác sĩ',
     subtitle: 'Danh mục bác sĩ được duyệt (theo mã CCHN) dùng để đối chiếu Mã bác sĩ trong hồ sơ giám định XML',
     searchPlaceholder: 'Tìm theo họ tên hoặc mã CCHN...',
@@ -97,6 +102,7 @@ export const CATALOG_CONFIGS = {
     ],
   },
   serviceGroup: {
+    icon: Layers,
     title: 'Danh mục mã nhóm DVKT',
     subtitle: 'Mã nhóm chi phí chuẩn theo dịch vụ/thủ thuật, dùng để đối chiếu MA_NHOM trong hồ sơ giám định XML',
     searchPlaceholder: 'Tìm theo mã hoặc tên...',
@@ -125,6 +131,7 @@ export const CATALOG_CONFIGS = {
     ],
   },
   vatTu: {
+    icon: Boxes,
     title: 'Danh mục vật tư y tế',
     subtitle: 'Danh mục VTYT bệnh viện dùng để đối chiếu mã vật tư trong hồ sơ giám định XML',
     searchPlaceholder: 'Tìm theo mã, tên hoặc nhóm vật tư...',

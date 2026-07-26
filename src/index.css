@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-brand-navy: #101a34;
   --color-brand-navy-hover: #1c2a4d;
@@ -13,5 +15,5 @@ body,
 }
 
 body {
-  @apply bg-slate-50 text-slate-900 antialiased;
+  @apply bg-slate-50 text-slate-900 antialiased transition-colors dark:bg-slate-950 dark:text-slate-100;
 }

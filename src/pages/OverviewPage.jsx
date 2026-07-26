@@ -1,35 +1,40 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ClipboardList, Layers, AlertTriangle, Wallet } from 'lucide-react'
+import { ClipboardList, Layers, AlertTriangle, Wallet, LayoutDashboard, History } from 'lucide-react'
 import * as statsApi from '../api/statsApi'
 import StatCard from '../components/dashboard/StatCard'
 import LoadingSpinner from '../components/common/LoadingSpinner'
 import ErrorBanner from '../components/common/ErrorBanner'
+import PageHeader from '../components/common/PageHeader'
+import EmptyState from '../components/common/EmptyState'
 import { formatDate } from '../utils/formatDate'
 import { formatCurrency } from '../utils/formatCurrency'
 import { getBatchStatusMeta } from '../utils/batchStatusMeta'
 
 function RecentBatchesCard({ batches }) {
   return (
-    <div className="rounded-md border border-slate-200 bg-white p-4">
-      <div className="mb-3 flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-slate-700">Đợt đối chiếu gần đây</h3>
+    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+      <div className="mb-3 flex items-center justify-between border-b border-slate-100 pb-3 dark:border-slate-800">
+        <h3 className="flex items-center gap-2 text-sm font-semibold text-slate-700 dark:text-slate-200">
+          <History size={16} className="text-brand-accent" />
+          Đợt đối chiếu gần đây
+        </h3>
         <Link to="/dot-doi-chieu" className="text-xs font-medium text-brand-accent hover:underline">
           Xem tất cả
         </Link>
       </div>
       {batches.length === 0 ? (
-        <p className="py-6 text-center text-sm text-slate-400">Chưa có đợt đối chiếu nào.</p>
+        <EmptyState icon={ClipboardList} title="Chưa có đợt đối chiếu nào" hint="Tạo đợt đối chiếu mới để bắt đầu theo dõi." className="py-8" />
       ) : (
-        <ul className="divide-y divide-slate-100">
+        <ul className="divide-y divide-slate-100 dark:divide-slate-800">
           {batches.map((b) => {
             const meta = getBatchStatusMeta(b.status)
             const Icon = meta.icon
             return (
               <li key={b.batchId} className="flex items-center justify-between gap-3 py-2.5 text-sm">
                 <div className="min-w-0">
-                  <p className="truncate font-medium text-slate-700">{formatDate(b.createdAt)}</p>
-                  <p className="text-xs text-slate-500">{b.rowCounts?.claimRows ?? 0} dòng chi phí</p>
+                  <p className="truncate font-medium text-slate-700 dark:text-slate-200">{formatDate(b.createdAt)}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">{b.rowCounts?.claimRows ?? 0} dòng chi phí</p>
                 </div>
                 <div className="flex shrink-0 items-center gap-3">
                   <span className={`inline-flex items-center gap-1 rounded px-2 py-0.5 text-xs font-medium ${meta.badgeClass}`}>
@@ -80,10 +85,11 @@ export default function OverviewPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-lg font-semibold text-slate-800">Tổng quan</h1>
-        <p className="text-sm text-slate-500">Thống kê nhanh xuyên suốt tất cả các đợt đối chiếu.</p>
-      </div>
+      <PageHeader
+        icon={LayoutDashboard}
+        title="Tổng quan"
+        subtitle="Thống kê nhanh xuyên suốt tất cả các đợt đối chiếu."
+      />
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard

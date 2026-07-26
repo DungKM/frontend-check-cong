@@ -18,7 +18,7 @@ export default function FileDropInput({ label, multiple = false, files, onChange
 
   return (
     <div>
-      <label className="mb-1 block text-sm font-medium text-slate-700">{label}</label>
+      <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">{label}</label>
       <div
         onDragOver={(e) => {
           e.preventDefault()
@@ -33,10 +33,10 @@ export default function FileDropInput({ label, multiple = false, files, onChange
         onClick={() => !disabled && inputRef.current?.click()}
         className={`cursor-pointer rounded-md border-2 border-dashed px-4 py-6 text-center text-sm transition ${
           disabled
-            ? 'cursor-not-allowed border-slate-200 bg-slate-50 text-slate-400'
+            ? 'cursor-not-allowed border-slate-200 bg-slate-50 text-slate-400 dark:border-slate-800 dark:bg-slate-800/50 dark:text-slate-500'
             : isDragging
-              ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
-              : 'border-slate-300 text-slate-500 hover:border-indigo-400 hover:text-indigo-600'
+              ? 'border-indigo-500 bg-indigo-50 text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-300'
+              : 'border-slate-300 text-slate-500 hover:border-indigo-400 hover:text-indigo-600 dark:border-slate-700 dark:text-slate-400 dark:hover:border-indigo-500 dark:hover:text-indigo-400'
         }`}
       >
         <input
@@ -51,9 +51,9 @@ export default function FileDropInput({ label, multiple = false, files, onChange
         {files && files.length > 0 ? (
           <ul className="space-y-1 text-left">
             {files.map((file, idx) => (
-              <li key={idx} className="flex items-center justify-between text-slate-700">
+              <li key={idx} className="flex items-center justify-between text-slate-700 dark:text-slate-300">
                 <span className="truncate">{file.name}</span>
-                <span className="ml-2 shrink-0 text-slate-400">{formatSize(file.size)}</span>
+                <span className="ml-2 shrink-0 text-slate-400 dark:text-slate-500">{formatSize(file.size)}</span>
               </li>
             ))}
           </ul>

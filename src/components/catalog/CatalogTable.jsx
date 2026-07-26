@@ -1,10 +1,11 @@
-import { Pencil, Trash2 } from 'lucide-react'
+import { Pencil, Trash2, Inbox } from 'lucide-react'
+import EmptyState from '../common/EmptyState'
 
 export default function CatalogTable({ columns, items, loading, onEdit, onDelete }) {
   return (
     <div className="overflow-x-auto">
       <table className="w-full min-w-max text-sm">
-        <thead className="bg-slate-50 text-left text-slate-600">
+        <thead className="bg-slate-50 text-left text-slate-600 dark:bg-slate-800 dark:text-slate-300">
           <tr>
             {columns.map((col) => (
               <th key={col.key} className="whitespace-nowrap px-4 py-2">
@@ -14,9 +15,9 @@ export default function CatalogTable({ columns, items, loading, onEdit, onDelete
             <th className="px-4 py-2"></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="text-slate-700 dark:text-slate-300">
           {items.map((row) => (
-            <tr key={row._id} className="border-t border-slate-100">
+            <tr key={row._id} className="border-t border-slate-100 dark:border-slate-800">
               {columns.map((col) => (
                 <td key={col.key} className="px-4 py-2">
                   {col.render ? col.render(row) : (row[col.key] ?? '')}
@@ -26,14 +27,14 @@ export default function CatalogTable({ columns, items, loading, onEdit, onDelete
                 <div className="flex justify-end gap-1">
                   <button
                     onClick={() => onEdit(row)}
-                    className="rounded-md p-1.5 text-slate-500 hover:bg-slate-100 hover:text-brand-accent"
+                    className="rounded-md p-1.5 text-slate-500 hover:bg-slate-100 hover:text-brand-accent dark:text-slate-400 dark:hover:bg-slate-800"
                     aria-label="Sửa"
                   >
                     <Pencil size={16} />
                   </button>
                   <button
                     onClick={() => onDelete(row)}
-                    className="rounded-md p-1.5 text-slate-500 hover:bg-red-50 hover:text-red-600"
+                    className="rounded-md p-1.5 text-slate-500 hover:bg-red-50 hover:text-red-600 dark:text-slate-400 dark:hover:bg-red-950"
                     aria-label="Xóa"
                   >
                     <Trash2 size={16} />
@@ -45,7 +46,11 @@ export default function CatalogTable({ columns, items, loading, onEdit, onDelete
         </tbody>
       </table>
       {!loading && items.length === 0 && (
-        <p className="p-6 text-center text-slate-400">Chưa có dữ liệu. Hãy nhập file hoặc thêm dòng mới để bắt đầu.</p>
+        <EmptyState
+          icon={Inbox}
+          title="Chưa có dữ liệu"
+          hint="Hãy nhập file hoặc thêm dòng mới để bắt đầu."
+        />
       )}
     </div>
   )

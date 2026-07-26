@@ -23,9 +23,9 @@ const columns = [
     size: 200,
     cell: ({ row }) => {
       const items = row.original.duDoanMaLoi || []
-      if (items.length === 0) return <span className="text-slate-400">-</span>
+      if (items.length === 0) return <span className="text-slate-400 dark:text-slate-500">-</span>
       return (
-        <ul className="divide-y divide-slate-200">
+        <ul className="divide-y divide-slate-200 dark:divide-slate-700">
           {items.map((item, idx) => (
             <li key={idx} className="py-1 first:pt-0 last:pb-0">
               <span className="font-medium">{item.maLoi}</span> - {item.tenLoi}
@@ -41,9 +41,9 @@ const columns = [
     size: 320,
     cell: ({ row }) => {
       const diffs = row.original.chiTietLech || []
-      if (diffs.length === 0) return <span className="text-slate-400">-</span>
+      if (diffs.length === 0) return <span className="text-slate-400 dark:text-slate-500">-</span>
       return (
-        <ul className="divide-y divide-slate-200">
+        <ul className="divide-y divide-slate-200 dark:divide-slate-700">
           {diffs.map((d, idx) => (
             <li key={idx} className="py-1 first:pt-0 last:pb-0">
               <span className="font-medium">{d.truong}:</span> XML=&quot;{d.giaTriXML}&quot; vs
@@ -62,7 +62,7 @@ const columns = [
       const notes = row.original.ghiChu || []
       if (notes.length === 0) return null
       return (
-        <ul className="list-disc space-y-1 pl-4 text-slate-500">
+        <ul className="list-disc space-y-1 pl-4 text-slate-500 dark:text-slate-400">
           {notes.map((note, idx) => (
             <li key={idx}>{note}</li>
           ))}
@@ -111,15 +111,15 @@ export default function ResultsTable({ rows }) {
       : 0
 
   return (
-    <div ref={parentRef} className="max-h-[70vh] overflow-auto rounded-md border border-slate-300 bg-white">
+    <div ref={parentRef} className="max-h-[70vh] overflow-auto rounded-md border border-slate-300 bg-white dark:border-slate-700 dark:bg-slate-900">
       <table className="w-full min-w-max border-collapse text-sm">
-        <thead className="sticky top-0 z-10 bg-slate-100 text-left text-slate-700 shadow-sm">
+        <thead className="sticky top-0 z-10 bg-slate-100 text-left text-slate-700 shadow-sm dark:bg-slate-800 dark:text-slate-200">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
                 <th
                   key={header.id}
-                  className="whitespace-nowrap border border-slate-300 px-3 py-2 font-semibold"
+                  className="whitespace-nowrap border border-slate-300 px-3 py-2 font-semibold dark:border-slate-700"
                   style={{ width: header.getSize() }}
                 >
                   {flexRender(header.column.columnDef.header, header.getContext())}
@@ -145,7 +145,7 @@ export default function ResultsTable({ rows }) {
                 className={`align-top ${rowClass}`}
               >
                 {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className="border border-slate-200 px-3 py-2">
+                  <td key={cell.id} className="border border-slate-200 px-3 py-2 dark:border-slate-800">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
@@ -160,7 +160,7 @@ export default function ResultsTable({ rows }) {
         </tbody>
       </table>
       {flatData.length === 0 && (
-        <p className="p-6 text-center text-slate-400">Không có dòng nào khớp bộ lọc</p>
+        <p className="p-6 text-center text-slate-400 dark:text-slate-500">Không có dòng nào khớp bộ lọc</p>
       )}
     </div>
   )

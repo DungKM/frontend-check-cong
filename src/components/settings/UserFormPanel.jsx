@@ -40,13 +40,13 @@ export default function UserFormPanel({ user, onClose, onSaved }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-      <form onSubmit={handleSubmit} className="w-full max-w-md rounded-xl bg-white p-5 shadow-lg">
+      <form onSubmit={handleSubmit} className="w-full max-w-md rounded-xl bg-white p-5 shadow-lg dark:bg-slate-900">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-base font-semibold text-slate-800">{isEdit ? 'Sửa tài khoản' : 'Tạo tài khoản mới'}</h2>
+          <h2 className="text-base font-semibold text-slate-800 dark:text-slate-100">{isEdit ? 'Sửa tài khoản' : 'Tạo tài khoản mới'}</h2>
           <button
             type="button"
             onClick={onClose}
-            className="rounded-md p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600"
+            className="rounded-md p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-300"
           >
             <X size={18} />
           </button>
@@ -54,7 +54,7 @@ export default function UserFormPanel({ user, onClose, onSaved }) {
 
         <div className="space-y-3">
           <div>
-            <label className="mb-1 block text-sm font-medium text-slate-700">
+            <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
               Tên đăng nhập {!isEdit && <span className="text-red-500">*</span>}
             </label>
             <input
@@ -63,12 +63,12 @@ export default function UserFormPanel({ user, onClose, onSaved }) {
               onChange={(e) => setUsername(e.target.value)}
               required
               disabled={isEdit}
-              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-brand-accent focus:outline-none disabled:bg-slate-50 disabled:text-slate-500"
+              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-brand-accent focus:outline-none disabled:bg-slate-50 disabled:text-slate-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:disabled:bg-slate-800/50"
             />
           </div>
 
           <div>
-            <label className="mb-1 block text-sm font-medium text-slate-700">
+            <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
               {isEdit ? 'Đặt lại mật khẩu (để trống nếu không đổi)' : 'Mật khẩu'}
               {!isEdit && <span className="text-red-500"> *</span>}
             </label>
@@ -79,16 +79,16 @@ export default function UserFormPanel({ user, onClose, onSaved }) {
               required={!isEdit}
               minLength={6}
               placeholder={isEdit ? '••••••' : 'Tối thiểu 6 ký tự'}
-              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-brand-accent focus:outline-none"
+              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-brand-accent focus:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
             />
           </div>
 
           <div>
-            <label className="mb-1 block text-sm font-medium text-slate-700">Vai trò</label>
+            <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">Vai trò</label>
             <select
               value={role}
               onChange={(e) => setRole(e.target.value)}
-              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-brand-accent focus:outline-none"
+              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-brand-accent focus:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
             >
               {ROLE_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value}>
@@ -99,12 +99,12 @@ export default function UserFormPanel({ user, onClose, onSaved }) {
           </div>
 
           {isEdit && (
-            <label className="flex items-center gap-2 text-sm text-slate-700">
+            <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
               <input
                 type="checkbox"
                 checked={active}
                 onChange={(e) => setActive(e.target.checked)}
-                className="h-4 w-4 rounded border-slate-300 text-brand-accent focus:ring-brand-accent"
+                className="h-4 w-4 rounded border-slate-300 text-brand-accent focus:ring-brand-accent dark:border-slate-600 dark:bg-slate-800"
               />
               Tài khoản đang hoạt động (bỏ chọn để khoá đăng nhập)
             </label>
@@ -117,7 +117,7 @@ export default function UserFormPanel({ user, onClose, onSaved }) {
           <button
             type="button"
             onClick={onClose}
-            className="rounded-md border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+            className="rounded-md border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
           >
             Hủy
           </button>

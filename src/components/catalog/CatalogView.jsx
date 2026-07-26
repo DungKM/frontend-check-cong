@@ -8,9 +8,12 @@ import CatalogFormPanel from './CatalogFormPanel'
 import Pagination from '../common/Pagination'
 import LoadingSpinner from '../common/LoadingSpinner'
 import ErrorBanner from '../common/ErrorBanner'
+import PageHeader from '../common/PageHeader'
+import { useToast } from '../../context/useToast'
 import * as catalogApi from '../../api/catalogApi'
 
 export default function CatalogView({ type, config }) {
+  const toast = useToast()
   const { items, total, page, pageSize, q, setQ, setPage, loading, error, refresh } = useCatalog(type)
   const [showImport, setShowImport] = useState(false)
   const [showHistory, setShowHistory] = useState(false)
@@ -34,19 +37,27 @@ export default function CatalogView({ type, config }) {
     try {
       await catalogApi.deleteCatalogItem(type, item._id)
       refresh()
+      toast.success('Đã xóa dòng danh mục')
     } catch (err) {
       setDeleteError(err.response?.data?.message || 'Xóa thất bại')
     }
   }
 
+  function handleSaved() {
+    refresh()
+    toast.success('Đã lưu thay đổi')
+  }
+
+  function handleImported() {
+    refresh()
+    toast.success('Đã nhập dữ liệu thành công')
+  }
+
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-lg font-semibold text-slate-800">{config.title}</h1>
-        <p className="text-sm text-slate-500">{config.subtitle}</p>
-      </div>
+      <PageHeader icon={config.icon} title={config.title} subtitle={config.subtitle} />
 
-      <div className="rounded-xl border border-slate-200 bg-white shadow-sm">
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
         <CatalogToolbar
           q={q}
           onQChange={setQ}
@@ -70,7 +81,7 @@ export default function CatalogView({ type, config }) {
           type={type}
           acceptFileTypes={config.acceptFileTypes}
           onClose={() => setShowImport(false)}
-          onImported={refresh}
+          onImported={handleImported}
         />
       )}
       {showHistory && <ImportHistoryPanel type={type} onClose={() => setShowHistory(false)} />}
@@ -80,7 +91,7 @@ export default function CatalogView({ type, config }) {
           fields={config.fields}
           item={editingItem}
           onClose={() => setShowForm(false)}
-          onSaved={refresh}
+          onSaved={handleSaved}
         />
       )}
     </div>

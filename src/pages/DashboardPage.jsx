@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { LayoutDashboard, Layers, AlertTriangle, ListChecks, ClipboardList } from 'lucide-react'
 import * as analyzeApi from '../api/analyzeApi'
 import StatCard from '../components/dashboard/StatCard'
 import DeductionByKhoaChart from '../components/dashboard/DeductionByKhoaChart'
 import DeductionByMonthChart from '../components/dashboard/DeductionByMonthChart'
 import LoadingSpinner from '../components/common/LoadingSpinner'
 import ErrorBanner from '../components/common/ErrorBanner'
+import PageHeader from '../components/common/PageHeader'
 import { getConclusionMeta } from '../utils/conclusionMeta'
 
 export default function DashboardPage() {
@@ -39,33 +41,45 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-lg font-semibold text-slate-800">Dashboard thống kê</h1>
-        <Link to={`/batches/${batchId}/results`} className="text-sm text-indigo-600 hover:underline">
+      <PageHeader icon={LayoutDashboard} title="Dashboard thống kê">
+        <Link
+          to={`/batches/${batchId}/results`}
+          className="flex items-center gap-1.5 rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
+        >
+          <ClipboardList size={16} />
           Xem bảng kết quả chi tiết
         </Link>
-      </div>
+      </PageHeader>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <StatCard label="Tổng số dòng chi phí" value={summary.tongSoDong.toLocaleString('vi-VN')} />
+        <StatCard
+          label="Tổng số dòng chi phí"
+          value={summary.tongSoDong.toLocaleString('vi-VN')}
+          icon={Layers}
+          iconColor="bg-blue-100 text-blue-600"
+        />
         <StatCard
           label="Số dòng có cảnh báo"
           value={summary.soDongCanhBao.toLocaleString('vi-VN')}
           accent="text-red-600"
+          icon={AlertTriangle}
+          iconColor="bg-red-100 text-red-600"
         />
         <StatCard
           label="Số nhóm kết luận"
           value={summary.theoKetLuan.length.toLocaleString('vi-VN')}
+          icon={ListChecks}
+          iconColor="bg-indigo-100 text-indigo-600"
         />
       </div>
 
-      <div className="rounded-md border border-slate-200 bg-white p-4">
-        <h3 className="mb-3 text-sm font-semibold text-slate-700">Phân bố theo kết luận đối chiếu</h3>
+      <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <h3 className="mb-3 text-sm font-semibold text-slate-700 dark:text-slate-200">Phân bố theo kết luận đối chiếu</h3>
         <div className="flex flex-wrap gap-3">
           {summary.theoKetLuan.map((item) => {
             const meta = getConclusionMeta(item.ketLuan)
             return (
-              <span key={item.ketLuan} className={`rounded px-3 py-1.5 text-sm ${meta.badgeClass}`}>
+              <span key={item.ketLuan} className={`rounded-full px-3 py-1.5 text-sm font-medium ${meta.badgeClass}`}>
                 {meta.label}: {item.count}
               </span>
             )

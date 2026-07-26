@@ -66,10 +66,10 @@ export default function ImportPanel({ type, acceptFileTypes, onClose, onImported
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-      <div className="w-full max-w-lg rounded-xl bg-white p-5 shadow-lg">
+      <div className="w-full max-w-lg rounded-xl bg-white p-5 shadow-lg dark:bg-slate-900">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-base font-semibold text-slate-800">Nhập dữ liệu danh mục</h2>
-          <button onClick={onClose} className="rounded-md p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600">
+          <h2 className="text-base font-semibold text-slate-800 dark:text-slate-100">Nhập dữ liệu danh mục</h2>
+          <button onClick={onClose} className="rounded-md p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-300">
             <X size={18} />
           </button>
         </div>
@@ -82,7 +82,7 @@ export default function ImportPanel({ type, acceptFileTypes, onClose, onImported
           hint="Kéo thả file Excel/CSV vào đây, hoặc bấm để chọn file"
           onChange={setFiles}
         />
-        <p className="mt-2 text-xs text-slate-400">
+        <p className="mt-2 text-xs text-slate-400 dark:text-slate-500">
           Dữ liệu cũ không bị xóa — chỉ thêm dòng mới và cập nhật những dòng đã có (cùng mã, cùng từ ngày). File
           lớn được xử lý nền theo lô — bạn có thể đóng cửa sổ này, việc nhập vẫn tiếp tục, xem lại ở "Lịch sử nhập".
         </p>
@@ -92,14 +92,16 @@ export default function ImportPanel({ type, acceptFileTypes, onClose, onImported
         {progress && (
           <div
             className={`mt-3 rounded-md px-3 py-2 text-sm ${
-              progress.status === 'failed' ? 'bg-red-50 text-red-800' : 'bg-emerald-50 text-emerald-800'
+              progress.status === 'failed'
+                ? 'bg-red-50 text-red-800 dark:bg-red-950 dark:text-red-300'
+                : 'bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300'
             }`}
           >
             <div className="font-medium">{STATUS_LABEL[progress.status] || progress.status}</div>
             {!isDone && !progress.rowsParsed && <div>Đang đọc file...</div>}
             {progress.rowsParsed > 0 && (
               <>
-                <div className="mt-1 h-2 w-full overflow-hidden rounded-full bg-emerald-100">
+                <div className="mt-1 h-2 w-full overflow-hidden rounded-full bg-emerald-100 dark:bg-emerald-900">
                   <div
                     className="h-full rounded-full bg-emerald-500 transition-all"
                     style={{
@@ -123,7 +125,7 @@ export default function ImportPanel({ type, acceptFileTypes, onClose, onImported
               </>
             )}
             {progress.warnings?.length > 0 && (
-              <details className="mt-1 text-amber-700">
+              <details className="mt-1 text-amber-700 dark:text-amber-400">
                 <summary className="cursor-pointer">{progress.warnings.length} cảnh báo</summary>
                 <ul className="ml-4 list-disc">
                   {progress.warnings.slice(0, 20).map((w, idx) => (
@@ -136,7 +138,7 @@ export default function ImportPanel({ type, acceptFileTypes, onClose, onImported
         )}
 
         <div className="mt-4 flex justify-end gap-2">
-          <button onClick={onClose} className="rounded-md border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">
+          <button onClick={onClose} className="rounded-md border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800">
             Đóng
           </button>
           <button

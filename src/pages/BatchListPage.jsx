@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
-import { Plus } from 'lucide-react'
+import { Plus, ClipboardList } from 'lucide-react'
 import { useBatches } from '../hooks/useBatches'
 import LoadingSpinner from '../components/common/LoadingSpinner'
 import ErrorBanner from '../components/common/ErrorBanner'
 import Pagination from '../components/common/Pagination'
+import PageHeader from '../components/common/PageHeader'
+import EmptyState from '../components/common/EmptyState'
 import { formatDate } from '../utils/formatDate'
 import { getBatchStatusMeta } from '../utils/batchStatusMeta'
 
@@ -12,11 +14,7 @@ export default function BatchListPage() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-lg font-semibold text-slate-800">Lịch sử đối chiếu</h1>
-          <p className="text-sm text-slate-500">Toàn bộ các đợt đối chiếu đã tạo, mới nhất trước.</p>
-        </div>
+      <PageHeader icon={ClipboardList} title="Lịch sử đối chiếu" subtitle="Toàn bộ các đợt đối chiếu đã tạo, mới nhất trước.">
         <Link
           to="/upload"
           className="flex items-center gap-1.5 rounded-md bg-brand-accent px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
@@ -24,22 +22,27 @@ export default function BatchListPage() {
           <Plus size={16} />
           Tạo đối chiếu mới
         </Link>
-      </div>
+      </PageHeader>
 
       <ErrorBanner message={error} />
       {loading && <LoadingSpinner label="Đang tải danh sách đợt đối chiếu..." />}
 
       {!loading && !error && batches.length === 0 && (
-        <p className="rounded-md border border-slate-200 bg-white p-10 text-center text-slate-500">
-          Chưa có đợt đối chiếu nào. Bấm "Tạo đối chiếu mới" để bắt đầu.
-        </p>
+        <div className="rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <EmptyState
+            icon={ClipboardList}
+            title="Chưa có đợt đối chiếu nào"
+            hint='Bấm "Tạo đối chiếu mới" để bắt đầu.'
+            className="py-14"
+          />
+        </div>
       )}
 
       {!loading && batches.length > 0 && (
         <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
           <div className="overflow-x-auto">
             <table className="w-full min-w-max text-sm">
-              <thead className="bg-slate-50 text-left text-slate-600">
+              <thead className="bg-slate-50 text-left text-slate-600 dark:bg-slate-800 dark:text-slate-300">
                 <tr>
                   <th className="px-4 py-2">Ngày tạo</th>
                   <th className="px-4 py-2">Số dòng chi phí</th>
@@ -47,12 +50,12 @@ export default function BatchListPage() {
                   <th className="px-4 py-2"></th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="text-slate-700 dark:text-slate-300">
                 {batches.map((batch) => {
                   const meta = getBatchStatusMeta(batch.status)
                   const Icon = meta.icon
                   return (
-                    <tr key={batch.batchId} className="border-t border-slate-100 transition hover:bg-slate-50">
+                    <tr key={batch.batchId} className="border-t border-slate-100 transition hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-800">
                       <td className="px-4 py-2">{formatDate(batch.createdAt)}</td>
                       <td className="px-4 py-2">{(batch.rowCounts?.claimRows ?? 0).toLocaleString('vi-VN')}</td>
                       <td className="px-4 py-2">

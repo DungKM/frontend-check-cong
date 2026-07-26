@@ -8,17 +8,17 @@ const MUTED = '#898781'
 function ChartTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null
   return (
-    <div className="rounded-md border border-slate-200 bg-white px-3 py-2 text-xs shadow-sm">
-      <p className="font-medium text-slate-700">Tháng {label}</p>
-      <p className="text-slate-500">{formatCurrency(payload[0].value)}</p>
+    <div className="rounded-md border border-slate-200 bg-white px-3 py-2 text-xs shadow-sm dark:border-slate-700 dark:bg-slate-800">
+      <p className="font-medium text-slate-700 dark:text-slate-200">Tháng {label}</p>
+      <p className="text-slate-500 dark:text-slate-400">{formatCurrency(payload[0].value)}</p>
     </div>
   )
 }
 
 export default function DeductionByMonthChart({ data }) {
   return (
-    <div className="rounded-md border border-slate-200 bg-white p-4">
-      <h3 className="mb-3 text-sm font-semibold text-slate-700">Tiền cảnh báo theo tháng</h3>
+    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+      <h3 className="mb-3 text-sm font-semibold text-slate-700 dark:text-slate-200">Tiền cảnh báo theo tháng</h3>
       <ResponsiveContainer width="100%" height={280}>
         <LineChart data={data} margin={{ top: 4, right: 8, left: 8, bottom: 4 }}>
           <CartesianGrid stroke={GRID} vertical={false} />

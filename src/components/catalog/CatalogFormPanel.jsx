@@ -50,10 +50,10 @@ export default function CatalogFormPanel({ type, fields, item, onClose, onSaved 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-      <form onSubmit={handleSubmit} className="max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-xl bg-white p-5 shadow-lg">
+      <form onSubmit={handleSubmit} className="max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-xl bg-white p-5 shadow-lg dark:bg-slate-900">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-base font-semibold text-slate-800">{isEdit ? 'Sửa dòng danh mục' : 'Thêm dòng danh mục'}</h2>
-          <button type="button" onClick={onClose} className="rounded-md p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600">
+          <h2 className="text-base font-semibold text-slate-800 dark:text-slate-100">{isEdit ? 'Sửa dòng danh mục' : 'Thêm dòng danh mục'}</h2>
+          <button type="button" onClick={onClose} className="rounded-md p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-300">
             <X size={18} />
           </button>
         </div>
@@ -61,7 +61,7 @@ export default function CatalogFormPanel({ type, fields, item, onClose, onSaved 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {fields.map((field) => (
             <div key={field.key} className={field.type === 'textarea' ? 'sm:col-span-2' : ''}>
-              <label className="mb-1 block text-sm font-medium text-slate-700">
+              <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
                 {field.label}
                 {field.required && <span className="text-red-500"> *</span>}
               </label>
@@ -70,7 +70,7 @@ export default function CatalogFormPanel({ type, fields, item, onClose, onSaved 
                   value={values[field.key]}
                   onChange={(e) => update(field.key, e.target.value)}
                   required={field.required}
-                  className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-brand-accent focus:outline-none"
+                  className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-brand-accent focus:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
                 >
                   <option value="">-- Chọn --</option>
                   {field.options.map((opt) => (
@@ -84,7 +84,7 @@ export default function CatalogFormPanel({ type, fields, item, onClose, onSaved 
                   value={values[field.key]}
                   onChange={(e) => update(field.key, e.target.value)}
                   rows={2}
-                  className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-brand-accent focus:outline-none"
+                  className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-brand-accent focus:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
                 />
               ) : (
                 <input
@@ -92,7 +92,7 @@ export default function CatalogFormPanel({ type, fields, item, onClose, onSaved 
                   value={values[field.key]}
                   onChange={(e) => update(field.key, e.target.value)}
                   required={field.required}
-                  className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-brand-accent focus:outline-none"
+                  className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-brand-accent focus:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
                 />
               )}
             </div>
@@ -102,7 +102,7 @@ export default function CatalogFormPanel({ type, fields, item, onClose, onSaved 
         <ErrorBanner message={error} />
 
         <div className="mt-4 flex justify-end gap-2">
-          <button type="button" onClick={onClose} className="rounded-md border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">
+          <button type="button" onClick={onClose} className="rounded-md border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800">
             Hủy
           </button>
           <button
