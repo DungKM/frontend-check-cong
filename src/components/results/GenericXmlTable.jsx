@@ -66,7 +66,7 @@ export default function GenericXmlTable({ rows, xmlType }) {
       ref={parentRef}
       className="max-h-[65vh] overflow-auto rounded-md border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900"
     >
-      <table className="w-full min-w-max border-collapse text-sm">
+      <table className="w-full table-auto border-collapse text-sm">
         <thead className="sticky top-0 z-10 bg-white text-left text-xs uppercase tracking-wide text-slate-500 shadow-sm dark:bg-slate-900 dark:text-slate-400">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
@@ -98,7 +98,7 @@ export default function GenericXmlTable({ rows, xmlType }) {
                 className={row.original._hasWarning ? 'bg-red-50 dark:bg-red-950/30' : ''}
               >
                 {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className="whitespace-nowrap px-4 py-2">
+                  <td key={cell.id} className="max-w-[28rem] break-words px-4 py-2 align-top">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}

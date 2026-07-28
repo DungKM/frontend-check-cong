@@ -34,7 +34,8 @@ export default function AppLayout() {
           <Outlet />
         </main>
       </div>
-      <ChatWidget />
+      {/* Tạm ẩn ChatWidget theo yêu cầu — bật lại bằng cách bỏ comment dòng dưới. */}
+      {/* <ChatWidget /> */}
       {paletteOpen && <CommandPalette onClose={() => setPaletteOpen(false)} />}
     </div>
   )
