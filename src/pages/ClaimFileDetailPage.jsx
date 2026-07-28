@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { ArrowLeft, Search } from 'lucide-react'
+import { ArrowLeft, FileSpreadsheet, Search } from 'lucide-react'
 import LoadingSpinner from '../components/common/LoadingSpinner'
 import ErrorBanner from '../components/common/ErrorBanner'
 import GenericXmlTable from '../components/results/GenericXmlTable'
@@ -9,6 +9,7 @@ import * as batchApi from '../api/batchApi'
 import { XML_TYPE_LABELS } from '../config/xmlColumnOrder'
 import { normalizeText } from '../utils/normalizeText'
 import { SEVERITY_LEVELS, getSeverityBucket } from '../utils/severityMeta'
+import { useToast } from '../context/useToast'
 
 // Single-record XML types (one hồ sơ = one record) whose date fields double as the
 // "Timeline" tab's milestone events — computed client-side from data already fetched
@@ -57,6 +58,7 @@ function xmlTypeSort(a, b) {
 export default function ClaimFileDetailPage() {
   const { batchId, fileName: encodedFileName } = useParams()
   const fileName = decodeURIComponent(encodedFileName)
+  const toast = useToast()
 
   const [xmlTypes, setXmlTypes] = useState([])
   const [errorCount, setErrorCount] = useState(0)
@@ -69,6 +71,7 @@ export default function ClaimFileDetailPage() {
   const [tabLoading, setTabLoading] = useState(false)
   const [tabError, setTabError] = useState('')
   const [errorFilters, setErrorFilters] = useState({ q: '', maLoi: '', mucDo: '' })
+  const [exporting, setExporting] = useState(false)
 
   useEffect(() => {
     let cancelled = false
@@ -188,6 +191,18 @@ export default function ClaimFileDetailPage() {
 
   const header = rowsByTab.XML1?.[0] || {}
 
+  async function handleExport() {
+    setExporting(true)
+    try {
+      await batchApi.exportClaimFileErrors(batchId, fileName)
+      toast.success('Đã xuất file Excel')
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Xuất Excel thất bại')
+    } finally {
+      setExporting(false)
+    }
+  }
+
   return (
     <div className="space-y-4">
       <Link
@@ -306,6 +321,14 @@ export default function ClaimFileDetailPage() {
                 <span className="flex items-center text-sm text-slate-500 dark:text-slate-400">
                   {filteredErrorRows.length}/{(rowsByTab.ERRORS || []).length} dòng
                 </span>
+                <button
+                  onClick={handleExport}
+                  disabled={exporting}
+                  className="ml-auto flex items-center gap-1.5 rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-emerald-700 disabled:opacity-60"
+                >
+                  <FileSpreadsheet size={16} />
+                  {exporting ? 'Đang xuất...' : 'Xuất Excel'}
+                </button>
               </div>
               <ResultsTable rows={filteredErrorRows} colorBy="severity" />
             </div>
