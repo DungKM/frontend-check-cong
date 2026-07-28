@@ -67,7 +67,7 @@ export default function BatchListPage() {
                       <td className="px-4 py-2 text-right">
                         {batch.status === 'analyzed' ? (
                           <div className="flex justify-end gap-3">
-                            <Link to={`/batches/${batch.batchId}/results`} className="text-brand-accent hover:underline">
+                            <Link to={`/batches/${batch.batchId}/files`} className="text-brand-accent hover:underline">
                               Xem kết quả
                             </Link>
                             <Link to={`/batches/${batch.batchId}/dashboard`} className="text-brand-accent hover:underline">

@@ -43,7 +43,7 @@ export default function DashboardPage() {
     <div className="space-y-6">
       <PageHeader icon={LayoutDashboard} title="Dashboard thống kê">
         <Link
-          to={`/batches/${batchId}/results`}
+          to={`/batches/${batchId}/files`}
           className="flex items-center gap-1.5 rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
         >
           <ClipboardList size={16} />

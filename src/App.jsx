@@ -10,6 +10,8 @@ import OverviewPage from './pages/OverviewPage'
 import BatchListPage from './pages/BatchListPage'
 import UploadPage from './pages/UploadPage'
 import ResultsPage from './pages/ResultsPage'
+import ClaimFilesPage from './pages/ClaimFilesPage'
+import ClaimFileDetailPage from './pages/ClaimFileDetailPage'
 import DashboardPage from './pages/DashboardPage'
 import DrugCatalogPage from './pages/DrugCatalogPage'
 import ServiceCatalogPage from './pages/ServiceCatalogPage'
@@ -33,6 +35,8 @@ function App() {
                 <Route path="/dot-doi-chieu" element={<BatchListPage />} />
                 <Route path="/upload" element={<UploadPage />} />
                 <Route path="/batches/:batchId/results" element={<ResultsPage />} />
+                <Route path="/batches/:batchId/files" element={<ClaimFilesPage />} />
+                <Route path="/batches/:batchId/files/:fileName" element={<ClaimFileDetailPage />} />
                 <Route path="/batches/:batchId/dashboard" element={<DashboardPage />} />
                 <Route element={<RequireRole roles={['admin']} />}>
                   <Route path="/danh-muc/thuoc" element={<DrugCatalogPage />} />

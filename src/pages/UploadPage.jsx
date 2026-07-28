@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { FilePlus2, PlayCircle } from 'lucide-react'
+import { FilePlus2 } from 'lucide-react'
 import FileDropInput from '../components/upload/FileDropInput'
-import UploadSummaryCard from '../components/upload/UploadSummaryCard'
+import ClaimFilesSummaryTable from '../components/upload/ClaimFilesSummaryTable'
 import ErrorBanner from '../components/common/ErrorBanner'
+import LoadingSpinner from '../components/common/LoadingSpinner'
 import PageHeader from '../components/common/PageHeader'
 import { useToast } from '../context/useToast'
 import * as uploadApi from '../api/uploadApi'
-import * as analyzeApi from '../api/analyzeApi'
+import * as batchApi from '../api/batchApi'
 
 const initialSlot = { files: [], uploading: false, result: null, error: '' }
 
@@ -15,37 +16,26 @@ export default function UploadPage() {
   const toast = useToast()
   const [batchId, setBatchId] = useState(null)
   const [claim, setClaim] = useState(initialSlot)
-  const [analyzing, setAnalyzing] = useState(false)
-  const [analyzeError, setAnalyzeError] = useState('')
+  const [claimFiles, setClaimFiles] = useState(null)
   const navigate = useNavigate()
 
   async function handleClaimFiles(files) {
     setClaim({ files, uploading: true, result: null, error: '' })
+    setClaimFiles(null)
     try {
       const result = await uploadApi.uploadClaimXml(files, batchId)
       setBatchId(result.batchId)
       setClaim({ files, uploading: false, result, error: '' })
+      const summary = await batchApi.getClaimFiles(result.batchId)
+      setClaimFiles(summary)
       toast.success('Tải file thành công')
     } catch (err) {
       setClaim({ files, uploading: false, result: null, error: err.response?.data?.message || 'Tải file thất bại' })
     }
   }
 
-  async function handleAnalyze() {
-    setAnalyzing(true)
-    setAnalyzeError('')
-    try {
-      await analyzeApi.runAnalyze(batchId)
-      navigate(`/batches/${batchId}/results`)
-    } catch (err) {
-      setAnalyzeError(err.response?.data?.message || 'Chạy đối chiếu thất bại')
-    } finally {
-      setAnalyzing(false)
-    }
-  }
-
   return (
-    <div className="mx-auto max-w-2xl space-y-6">
+    <div className="space-y-6">
       <PageHeader
         icon={FilePlus2}
         title="Tạo đợt đối chiếu mới"
@@ -62,19 +52,16 @@ export default function UploadPage() {
           disabled={claim.uploading}
           onChange={handleClaimFiles}
         />
-        <UploadSummaryCard result={claim.result} error={claim.error} />
+        <ErrorBanner message={claim.error} />
+        {claim.uploading && <LoadingSpinner label="Đang tải file lên..." />}
+        {!claim.uploading && claim.result && !claimFiles && <LoadingSpinner label="Đang tải danh sách hồ sơ..." />}
+        {claimFiles && (
+          <ClaimFilesSummaryTable
+            files={claimFiles}
+            onRowClick={(fileName) => navigate(`/batches/${batchId}/files/${encodeURIComponent(fileName)}`)}
+          />
+        )}
       </div>
-
-      <ErrorBanner message={analyzeError} />
-
-      <button
-        onClick={handleAnalyze}
-        disabled={!claim.result || claim.uploading || analyzing}
-        className="flex w-full items-center justify-center gap-2 rounded-md bg-brand-accent px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
-      >
-        <PlayCircle size={18} />
-        {analyzing ? 'Đang chạy đối chiếu...' : 'Chạy đối chiếu'}
-      </button>
     </div>
   )
 }

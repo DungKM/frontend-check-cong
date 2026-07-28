@@ -3,6 +3,7 @@ import { getCoreRowModel, useReactTable, flexRender } from '@tanstack/react-tabl
 import { useVirtualizer } from '@tanstack/react-virtual'
 import { formatCurrency } from '../../utils/formatCurrency'
 import { getConclusionMeta } from '../../utils/conclusionMeta'
+import { getSeverityRowClass } from '../../utils/severityMeta'
 
 const columns = [
   { id: 'stt', header: 'STT', size: 60, cell: ({ row }) => row.index + 1 },
@@ -72,7 +73,7 @@ const columns = [
   },
 ]
 
-export default function ResultsTable({ rows }) {
+export default function ResultsTable({ rows, colorBy = 'ketLuan' }) {
   const parentRef = useRef(null)
 
   const flatData = useMemo(
@@ -136,7 +137,10 @@ export default function ResultsTable({ rows }) {
           )}
           {virtualRows.map((virtualRow) => {
             const row = tableRows[virtualRow.index]
-            const rowClass = getConclusionMeta(row.original.ketLuan).rowClass
+            const rowClass =
+              colorBy === 'severity'
+                ? getSeverityRowClass(row.original.duDoanMaLoi)
+                : getConclusionMeta(row.original.ketLuan).rowClass
             return (
               <tr
                 key={row.id}
