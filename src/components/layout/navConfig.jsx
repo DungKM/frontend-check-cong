@@ -9,6 +9,7 @@ import {
   UserRound,
   Layers,
   Boxes,
+  Percent,
 } from 'lucide-react'
 
 // items with no `roles` are visible to everyone; otherwise the user's role must be
@@ -31,6 +32,7 @@ export const navSections = [
       { to: '/danh-muc/bac-si', label: 'Danh mục bác sĩ', icon: UserRound, roles: ['admin'] },
       { to: '/danh-muc/ma-nhom', label: 'Danh mục mã nhóm DVKT', icon: Layers, roles: ['admin'] },
       { to: '/danh-muc/vat-tu', label: 'Danh mục vật tư y tế', icon: Boxes, roles: ['admin'] },
+      { to: '/danh-muc/muc-huong', label: 'Danh mục mức hưởng theo đối tượng', icon: Percent, roles: ['admin'] },
     ],
   },
   {

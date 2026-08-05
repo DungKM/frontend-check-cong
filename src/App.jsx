@@ -19,6 +19,7 @@ import ErrorCodeCatalogPage from './pages/ErrorCodeCatalogPage'
 import DoctorCatalogPage from './pages/DoctorCatalogPage'
 import ServiceGroupCatalogPage from './pages/ServiceGroupCatalogPage'
 import VatTuCatalogPage from './pages/VatTuCatalogPage'
+import BenefitRateCatalogPage from './pages/BenefitRateCatalogPage'
 import SettingsPage from './pages/SettingsPage'
 import NotFoundPage from './pages/NotFoundPage'
 
@@ -45,6 +46,7 @@ function App() {
                   <Route path="/danh-muc/bac-si" element={<DoctorCatalogPage />} />
                   <Route path="/danh-muc/ma-nhom" element={<ServiceGroupCatalogPage />} />
                   <Route path="/danh-muc/vat-tu" element={<VatTuCatalogPage />} />
+                  <Route path="/danh-muc/muc-huong" element={<BenefitRateCatalogPage />} />
                   <Route path="/settings" element={<SettingsPage />} />
                 </Route>
               </Route>

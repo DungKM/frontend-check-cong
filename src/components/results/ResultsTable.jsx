@@ -55,22 +55,6 @@ const columns = [
       )
     },
   },
-  {
-    id: 'ghiChu',
-    header: 'Ghi chú',
-    size: 260,
-    cell: ({ row }) => {
-      const notes = row.original.ghiChu || []
-      if (notes.length === 0) return null
-      return (
-        <ul className="list-disc space-y-1 pl-4 text-slate-500 dark:text-slate-400">
-          {notes.map((note, idx) => (
-            <li key={idx}>{note}</li>
-          ))}
-        </ul>
-      )
-    },
-  },
 ]
 
 export default function ResultsTable({ rows, colorBy = 'ketLuan' }) {
@@ -83,7 +67,6 @@ export default function ResultsTable({ rows, colorBy = 'ketLuan' }) {
         ketLuan: r.ketLuan,
         chiTietLech: r.chiTietLech,
         duDoanMaLoi: r.duDoanMaLoi,
-        ghiChu: r.ghiChu,
       })),
     [rows]
   )
