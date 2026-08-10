@@ -19,7 +19,6 @@ export const navSections = [
     title: 'Điều hành',
     items: [
       { to: '/', label: 'Tổng quan', icon: LayoutDashboard, end: true },
-      { to: '/dot-doi-chieu', label: 'Đợt đối chiếu', icon: ClipboardList },
       { to: '/upload', label: 'Tạo đối chiếu mới', icon: FilePlus2 },
     ],
   },

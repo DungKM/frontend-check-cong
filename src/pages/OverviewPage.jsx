@@ -19,9 +19,6 @@ function RecentBatchesCard({ batches }) {
           <History size={16} className="text-brand-accent" />
           Đợt đối chiếu gần đây
         </h3>
-        <Link to="/dot-doi-chieu" className="text-xs font-medium text-brand-accent hover:underline">
-          Xem tất cả
-        </Link>
       </div>
       {batches.length === 0 ? (
         <EmptyState icon={ClipboardList} title="Chưa có đợt đối chiếu nào" hint="Tạo đợt đối chiếu mới để bắt đầu theo dõi." className="py-8" />

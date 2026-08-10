@@ -7,7 +7,6 @@ import RequireRole from './auth/RequireRole'
 import AppLayout from './components/layout/AppLayout'
 import LoginPage from './pages/LoginPage'
 import OverviewPage from './pages/OverviewPage'
-import BatchListPage from './pages/BatchListPage'
 import UploadPage from './pages/UploadPage'
 import ResultsPage from './pages/ResultsPage'
 import ClaimFilesPage from './pages/ClaimFilesPage'
@@ -33,7 +32,6 @@ function App() {
             <Route element={<ProtectedRoute />}>
               <Route element={<AppLayout />}>
                 <Route path="/" element={<OverviewPage />} />
-                <Route path="/dot-doi-chieu" element={<BatchListPage />} />
                 <Route path="/upload" element={<UploadPage />} />
                 <Route path="/batches/:batchId/results" element={<ResultsPage />} />
                 <Route path="/batches/:batchId/files" element={<ClaimFilesPage />} />
