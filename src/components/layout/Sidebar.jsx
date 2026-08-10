@@ -1,4 +1,3 @@
-import { ShieldCheck } from 'lucide-react'
 import { useAuth } from '../../auth/useAuth'
 import { navSections } from './navConfig'
 import SidebarSection from './SidebarSection'
@@ -19,17 +18,17 @@ export default function Sidebar({ open, onNavigate }) {
         <div className="fixed inset-0 z-30 bg-black/40 lg:hidden" onClick={onNavigate} aria-hidden="true" />
       )}
       <aside
-        className={`fixed inset-y-0 left-0 z-40 flex w-64 flex-col gap-6 overflow-y-auto bg-brand-navy px-3 py-5 transition-transform lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-40 flex w-64 flex-col gap-6 overflow-y-auto bg-gradient-to-b from-brand-navy to-[#0b1226] px-3 py-5 transition-transform lg:translate-x-0 ${
           open ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <div className="flex items-center gap-2 border-b border-white/10 px-3 pb-5">
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-accent/15">
-            <ShieldCheck size={22} className="text-brand-accent" />
+        <div className="flex items-center gap-2.5 border-b border-white/10 px-3 pb-5">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white p-1 shadow-lg ring-1 ring-white/20">
+            <img src="/logo-vien-e.jpeg" alt="Bệnh viện E" className="h-full w-full object-contain" />
           </span>
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold text-white">Đối chiếu BHYT</p>
-            <p className="truncate text-xs text-slate-400">Gửi cổng giám định</p>
+            <p className="truncate text-sm font-semibold text-white">Bệnh viện E</p>
+            <p className="truncate text-xs text-slate-400">Đối chiếu BHYT — Gửi cổng giám định</p>
           </div>
         </div>
 
@@ -40,8 +39,8 @@ export default function Sidebar({ open, onNavigate }) {
         </div>
 
         {user && (
-          <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-accent text-sm font-semibold text-white">
+          <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 transition hover:bg-white/[0.08]">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-accent to-sky-400 text-sm font-semibold text-white shadow-sm">
               {user.username?.slice(0, 2).toUpperCase()}
             </span>
             <div className="min-w-0 flex-1">

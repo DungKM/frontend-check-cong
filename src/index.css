@@ -6,6 +6,8 @@
   --color-brand-navy: #101a34;
   --color-brand-navy-hover: #1c2a4d;
   --color-brand-accent: #3b6bf5;
+  --color-brand-accent-hover: #2f5ce0;
+  --color-brand-accent-soft: #eef2ff;
 }
 
 html,
@@ -16,4 +18,11 @@ body,
 
 body {
   @apply bg-slate-50 text-slate-900 antialiased transition-colors dark:bg-slate-950 dark:text-slate-100;
+}
+
+@layer components {
+  /* Kiểu "card" dùng chung — 1 nơi chỉnh để đồng bộ toàn bộ card trong app. */
+  .card {
+    @apply rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900;
+  }
 }

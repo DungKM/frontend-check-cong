@@ -8,7 +8,7 @@ export default function Topbar({ onOpenSidebar, onOpenPalette }) {
   const { theme, toggleTheme } = useTheme()
 
   return (
-    <header className="flex items-center justify-between border-b border-slate-200 bg-white px-4 py-3 shadow-sm dark:border-slate-800 dark:bg-slate-900 lg:px-6">
+    <header className="sticky top-0 z-20 flex items-center justify-between border-b border-slate-200 bg-white/90 px-4 py-3 backdrop-blur-sm dark:border-slate-800 dark:bg-slate-900/90 lg:px-6">
       <div className="flex items-center gap-2">
         <button
           onClick={onOpenSidebar}
@@ -19,7 +19,7 @@ export default function Topbar({ onOpenSidebar, onOpenPalette }) {
         </button>
         <button
           onClick={onOpenPalette}
-          className="hidden items-center gap-2 rounded-md border border-slate-300 px-3 py-1.5 text-sm text-slate-500 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-400 dark:hover:bg-slate-800 sm:flex"
+          className="hidden items-center gap-2 rounded-md border border-slate-300 px-3 py-1.5 text-sm text-slate-500 transition hover:border-brand-accent/40 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-400 dark:hover:border-brand-accent/40 dark:hover:bg-slate-800 sm:flex"
         >
           <Search size={15} />
           Tìm kiếm nhanh
@@ -37,7 +37,7 @@ export default function Topbar({ onOpenSidebar, onOpenPalette }) {
       <div className="flex items-center gap-3">
         <button
           onClick={toggleTheme}
-          className="rounded-md p-2 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+          className="rounded-md p-2 text-slate-500 transition hover:bg-slate-100 hover:text-brand-accent dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-brand-accent"
           aria-label={theme === 'dark' ? 'Chuyển sang chế độ sáng' : 'Chuyển sang chế độ tối'}
           title={theme === 'dark' ? 'Chế độ sáng' : 'Chế độ tối'}
         >
@@ -46,7 +46,7 @@ export default function Topbar({ onOpenSidebar, onOpenPalette }) {
 
         {user && (
           <div className="flex items-center gap-2.5">
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-xs font-semibold text-brand-accent dark:bg-indigo-500/20">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-accent to-sky-400 text-xs font-semibold text-white shadow-sm">
               {user.username?.slice(0, 2).toUpperCase()}
             </span>
             <div className="hidden leading-tight sm:block">

@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { UploadCloud } from 'lucide-react'
 
 function formatSize(bytes) {
   if (bytes < 1024) return `${bytes} B`
@@ -31,12 +32,12 @@ export default function FileDropInput({ label, multiple = false, files, onChange
           if (!disabled) handleFiles(e.dataTransfer.files)
         }}
         onClick={() => !disabled && inputRef.current?.click()}
-        className={`cursor-pointer rounded-md border-2 border-dashed px-4 py-6 text-center text-sm transition ${
+        className={`cursor-pointer rounded-xl border-2 border-dashed px-4 py-8 text-center text-sm transition ${
           disabled
             ? 'cursor-not-allowed border-slate-200 bg-slate-50 text-slate-400 dark:border-slate-800 dark:bg-slate-800/50 dark:text-slate-500'
             : isDragging
-              ? 'border-indigo-500 bg-indigo-50 text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-300'
-              : 'border-slate-300 text-slate-500 hover:border-indigo-400 hover:text-indigo-600 dark:border-slate-700 dark:text-slate-400 dark:hover:border-indigo-500 dark:hover:text-indigo-400'
+              ? 'border-brand-accent bg-brand-accent-soft text-brand-accent scale-[1.01] dark:bg-indigo-500/10 dark:text-indigo-300'
+              : 'border-slate-300 text-slate-500 hover:border-brand-accent/60 hover:bg-slate-50/50 hover:text-brand-accent dark:border-slate-700 dark:text-slate-400 dark:hover:border-indigo-500 dark:hover:text-indigo-400'
         }`}
       >
         <input
@@ -58,9 +59,12 @@ export default function FileDropInput({ label, multiple = false, files, onChange
             ))}
           </ul>
         ) : (
-          <span>
-            {hint || `Kéo thả file vào đây, hoặc bấm để chọn file${multiple ? ' (có thể chọn nhiều file)' : ''}`}
-          </span>
+          <div className="flex flex-col items-center gap-2">
+            <UploadCloud size={28} className="opacity-70" />
+            <span>
+              {hint || `Kéo thả file vào đây, hoặc bấm để chọn file${multiple ? ' (có thể chọn nhiều file)' : ''}`}
+            </span>
+          </div>
         )}
       </div>
     </div>

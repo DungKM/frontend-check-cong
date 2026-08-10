@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { ShieldCheck, CheckCircle2, User, Lock, AlertTriangle, TrendingUp } from 'lucide-react'
+import { CheckCircle2, User, Lock, AlertTriangle, TrendingUp } from 'lucide-react'
 import { useAuth } from '../auth/useAuth'
 import ErrorBanner from '../components/common/ErrorBanner'
 
@@ -44,12 +44,12 @@ export default function LoginPage() {
         <div className="pointer-events-none absolute right-10 bottom-24 h-56 w-56 rounded-full bg-amber-400/10 blur-3xl" />
 
         <div className="relative flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-accent/15">
-            <ShieldCheck size={24} className="text-brand-accent" />
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white p-1">
+            <img src="/logo-vien-e.jpeg" alt="Bệnh viện E" className="h-full w-full object-contain" />
           </span>
           <div>
-            <p className="text-sm font-semibold">Đối chiếu BHYT</p>
-            <p className="text-xs text-slate-400">Gửi cổng giám định</p>
+            <p className="text-sm font-semibold">Bệnh viện E</p>
+            <p className="text-xs text-slate-400">Đối chiếu BHYT — Gửi cổng giám định</p>
           </div>
         </div>
 

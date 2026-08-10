@@ -11,14 +11,14 @@ export default function Pagination({ page, pageSize, total, onPageChange }) {
         <button
           onClick={() => onPageChange(page - 1)}
           disabled={page <= 1}
-          className="rounded-md border border-slate-300 px-3 py-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:hover:bg-slate-800"
+          className="rounded-md border border-slate-300 px-3 py-1 transition hover:border-brand-accent/40 hover:text-brand-accent disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-slate-300 disabled:hover:text-inherit dark:border-slate-700 dark:hover:bg-slate-800"
         >
           Trước
         </button>
         <button
           onClick={() => onPageChange(page + 1)}
           disabled={page >= totalPages}
-          className="rounded-md border border-slate-300 px-3 py-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:hover:bg-slate-800"
+          className="rounded-md border border-slate-300 px-3 py-1 transition hover:border-brand-accent/40 hover:text-brand-accent disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-slate-300 disabled:hover:text-inherit dark:border-slate-700 dark:hover:bg-slate-800"
         >
           Sau
         </button>

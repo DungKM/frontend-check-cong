@@ -9,19 +9,19 @@ export default function ClaimFilesSummaryTable({ files, onRowClick }) {
 
   return (
     <div className="space-y-2">
-      <p className="flex items-center gap-2 text-sm font-medium">
-        <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
-          <CheckCircle2 size={16} /> {successCount} thành công
+      <p className="flex items-center gap-3 text-sm font-medium">
+        <span className="flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400">
+          <CheckCircle2 size={14} /> {successCount} thành công
         </span>
         {errorCount > 0 && (
-          <span className="flex items-center gap-1.5 text-red-600 dark:text-red-400">
-            <XCircle size={16} /> {errorCount} lỗi
+          <span className="flex items-center gap-1.5 rounded-full bg-red-50 px-2.5 py-1 text-red-700 dark:bg-red-500/10 dark:text-red-400">
+            <XCircle size={14} /> {errorCount} lỗi
           </span>
         )}
       </p>
-      <div className="overflow-auto rounded-md border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
+      <div className="card overflow-auto">
         <table className="w-full min-w-max border-collapse text-sm">
-          <thead className="text-left text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
+          <thead className="bg-slate-50 text-left text-xs uppercase tracking-wide text-slate-500 dark:bg-slate-800/60 dark:text-slate-400">
             <tr>
               <th className="px-4 py-2.5 font-medium">Tên file</th>
               <th className="px-4 py-2.5 font-medium">Trạng thái</th>
@@ -37,7 +37,7 @@ export default function ClaimFilesSummaryTable({ files, onRowClick }) {
               <tr
                 key={f.fileName}
                 onClick={() => onRowClick(f.fileName)}
-                className="cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/60"
+                className="cursor-pointer transition hover:bg-slate-50 dark:hover:bg-slate-800/60"
               >
                 <td className="px-4 py-3">{f.fileName}</td>
                 <td className="px-4 py-3">

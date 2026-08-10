@@ -42,7 +42,7 @@ export default function UploadPage() {
         subtitle="Nạp file hồ sơ giám định (XML/ZIP) gửi cổng BHYT — hệ thống sẽ tự đối chiếu với danh mục thuốc, dịch vụ kỹ thuật và mã lỗi đã có sẵn."
       />
 
-      <div className="space-y-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+      <div className="card space-y-4 p-6">
         <FileDropInput
           label="Hồ sơ giám định (XML/ZIP)"
           multiple

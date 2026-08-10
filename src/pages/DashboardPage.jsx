@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { LayoutDashboard, Layers, AlertTriangle, ListChecks, ClipboardList } from 'lucide-react'
+import { LayoutDashboard, Layers, AlertTriangle, PiggyBank, ClipboardList } from 'lucide-react'
 import * as analyzeApi from '../api/analyzeApi'
 import StatCard from '../components/dashboard/StatCard'
 import DeductionByKhoaChart from '../components/dashboard/DeductionByKhoaChart'
@@ -8,6 +8,7 @@ import DeductionByMonthChart from '../components/dashboard/DeductionByMonthChart
 import LoadingSpinner from '../components/common/LoadingSpinner'
 import ErrorBanner from '../components/common/ErrorBanner'
 import PageHeader from '../components/common/PageHeader'
+import { formatCurrency } from '../utils/formatCurrency'
 import { getConclusionMeta } from '../utils/conclusionMeta'
 
 export default function DashboardPage() {
@@ -41,7 +42,11 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader icon={LayoutDashboard} title="Dashboard thống kê">
+      <PageHeader
+        icon={LayoutDashboard}
+        title="Dashboard thống kê"
+        subtitle="Chi phí đề nghị của các dòng bị cảnh báo — tránh được nếu sửa trước khi gửi cổng giám định."
+      >
         <Link
           to={`/batches/${batchId}/files`}
           className="flex items-center gap-1.5 rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
@@ -53,23 +58,24 @@ export default function DashboardPage() {
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <StatCard
-          label="Tổng số dòng chi phí"
-          value={summary.tongSoDong.toLocaleString('vi-VN')}
-          icon={Layers}
-          iconColor="bg-blue-100 text-blue-600"
+          label="Chi phí tiết kiệm được nhờ đối chiếu"
+          value={formatCurrency(summary.tongTienTietKiem)}
+          accent="text-emerald-600 dark:text-emerald-400"
+          icon={PiggyBank}
+          iconColor="bg-emerald-100 text-emerald-600 dark:bg-emerald-500/15 dark:text-emerald-400"
         />
         <StatCard
           label="Số dòng có cảnh báo"
           value={summary.soDongCanhBao.toLocaleString('vi-VN')}
-          accent="text-red-600"
+          accent="text-red-600 dark:text-red-400"
           icon={AlertTriangle}
-          iconColor="bg-red-100 text-red-600"
+          iconColor="bg-red-100 text-red-600 dark:bg-red-500/15 dark:text-red-400"
         />
         <StatCard
-          label="Số nhóm kết luận"
-          value={summary.theoKetLuan.length.toLocaleString('vi-VN')}
-          icon={ListChecks}
-          iconColor="bg-indigo-100 text-indigo-600"
+          label="Tổng số dòng chi phí"
+          value={summary.tongSoDong.toLocaleString('vi-VN')}
+          icon={Layers}
+          iconColor="bg-blue-100 text-blue-600 dark:bg-blue-500/15 dark:text-blue-400"
         />
       </div>
 
